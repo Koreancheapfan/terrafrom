@@ -1,0 +1,301 @@
+{
+  "version": 4,
+  "terraform_version": "1.3.3",
+  "serial": 150,
+  "lineage": "9fd630af-bb10-39c3-4ba6-b201cf174b69",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "ncloud_init_script",
+      "name": "bus-crol-init",
+      "provider": "provider[\"registry.terraform.io/navercloudplatform/ncloud\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "content": "#!/bin/bash\r\nsudo apt update -y\r\nsudo apt install -y software-properties-common\r\nsudo add-apt-repository -y ppa:deadsnakes/ppa\r\nsudo apt install -y python3.9 python3.9-distutils\r\nsudo curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py\r\nsudo python3.9 /tmp/get-pip.py\r\nsudo pip install -r /tmp/requirements.txt\r\nsudo python run /bus-crol-main.py",
+            "description": "",
+            "id": "25443",
+            "init_script_no": "25443",
+            "name": "bus-crol-init",
+            "os_type": "LNX"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "ncloud_network_acl",
+      "name": "bus-crol-nacl",
+      "provider": "provider[\"registry.terraform.io/navercloudplatform/ncloud\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "crol nacl",
+            "id": "47420",
+            "is_default": false,
+            "name": "bus-crol-nacl",
+            "network_acl_no": "47420",
+            "vpc_no": "30583"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "ncloud_vpc.bus-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "ncloud_network_acl",
+      "name": "bus-dev-nacl",
+      "provider": "provider[\"registry.terraform.io/navercloudplatform/ncloud\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "dev nacl",
+            "id": "47419",
+            "is_default": false,
+            "name": "bus-dev-nacl",
+            "network_acl_no": "47419",
+            "vpc_no": "30583"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "ncloud_vpc.bus-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "ncloud_network_acl_rule",
+      "name": "bus-crol-secret-rule",
+      "provider": "provider[\"registry.terraform.io/navercloudplatform/ncloud\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "47420",
+            "inbound": [
+              {
+                "deny_allow_group_no": "",
+                "description": "",
+                "ip_block": "0.0.0.0/0",
+                "port_range": "",
+                "priority": 0,
+                "protocol": "ICMP",
+                "rule_action": "ALLOW"
+              },
+              {
+                "deny_allow_group_no": "",
+                "description": "",
+                "ip_block": "0.0.0.0/0",
+                "port_range": "22",
+                "priority": 199,
+                "protocol": "TCP",
+                "rule_action": "DROP"
+              },
+              {
+                "deny_allow_group_no": "",
+                "description": "",
+                "ip_block": "221.162.65.184/32",
+                "port_range": "1-65535",
+                "priority": 20,
+                "protocol": "TCP",
+                "rule_action": "ALLOW"
+              }
+            ],
+            "network_acl_no": "47420",
+            "outbound": [
+              {
+                "deny_allow_group_no": "",
+                "description": "",
+                "ip_block": "0.0.0.0/0",
+                "port_range": "",
+                "priority": 0,
+                "protocol": "ICMP",
+                "rule_action": "ALLOW"
+              },
+              {
+                "deny_allow_group_no": "",
+                "description": "",
+                "ip_block": "0.0.0.0/0",
+                "port_range": "1-65535",
+                "priority": 10,
+                "protocol": "TCP",
+                "rule_action": "ALLOW"
+              },
+              {
+                "deny_allow_group_no": "",
+                "description": "",
+                "ip_block": "0.0.0.0/0",
+                "port_range": "1-65535",
+                "priority": 20,
+                "protocol": "UDP",
+                "rule_action": "ALLOW"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "ncloud_network_acl.bus-crol-nacl",
+            "ncloud_vpc.bus-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "ncloud_server",
+      "name": "terraform-server",
+      "provider": "provider[\"registry.terraform.io/navercloudplatform/ncloud\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_control_group_configuration_no_list": null,
+            "base_block_storage_disk_detail_type": "HDD",
+            "base_block_storage_disk_type": "NET",
+            "base_block_storage_size": null,
+            "cpu_count": 2,
+            "description": "",
+            "fee_system_type_code": null,
+            "id": "14966451",
+            "init_script_no": "",
+            "instance_no": "14966451",
+            "internet_line_type": null,
+            "is_encrypted_base_block_storage_volume": null,
+            "is_fee_charging_monitoring": null,
+            "is_protect_server_termination": false,
+            "login_key_name": "ncw2",
+            "member_server_image_no": null,
+            "memory_size": 0,
+            "name": "dev-terraform",
+            "network_interface": [
+              {
+                "network_interface_no": "1611609",
+                "order": 0,
+                "private_ip": "10.0.1.6",
+                "subnet_no": "66233"
+              }
+            ],
+            "placement_group_no": "",
+            "platform_type": "UBS64",
+            "port_forwarding_external_port": null,
+            "port_forwarding_internal_port": null,
+            "port_forwarding_public_ip": null,
+            "private_ip": null,
+            "public_ip": "",
+            "raid_type_name": null,
+            "region": null,
+            "server_image_name": null,
+            "server_image_product_code": "SW.VSVR.OS.LNX64.UBNTU.SVR1804.B050",
+            "server_product_code": "SVR.VSVR.HICPU.C002.M004.NET.HDD.B050.G002",
+            "subnet_no": "66233",
+            "tag_list": [],
+            "timeouts": null,
+            "user_data": null,
+            "vpc_no": "30583",
+            "zone": "KR-2"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozNjAwMDAwMDAwMDAwLCJkZWxldGUiOjMwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "ncloud_network_acl.bus-dev-nacl",
+            "ncloud_subnet.bus-dev-subnet",
+            "ncloud_vpc.bus-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "ncloud_subnet",
+      "name": "bus-crol-subnet",
+      "provider": "provider[\"registry.terraform.io/navercloudplatform/ncloud\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "66234",
+            "name": "bus-crol-subnet",
+            "network_acl_no": "47420",
+            "subnet": "10.0.2.0/24",
+            "subnet_no": "66234",
+            "subnet_type": "PUBLIC",
+            "usage_type": "GEN",
+            "vpc_no": "30583",
+            "zone": "KR-2"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "ncloud_network_acl.bus-crol-nacl",
+            "ncloud_vpc.bus-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "ncloud_subnet",
+      "name": "bus-dev-subnet",
+      "provider": "provider[\"registry.terraform.io/navercloudplatform/ncloud\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "66233",
+            "name": "bus-dev-subnet",
+            "network_acl_no": "47419",
+            "subnet": "10.0.1.0/24",
+            "subnet_no": "66233",
+            "subnet_type": "PUBLIC",
+            "usage_type": "GEN",
+            "vpc_no": "30583",
+            "zone": "KR-2"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "ncloud_network_acl.bus-dev-nacl",
+            "ncloud_vpc.bus-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "ncloud_vpc",
+      "name": "bus-vpc",
+      "provider": "provider[\"registry.terraform.io/navercloudplatform/ncloud\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "default_access_control_group_no": "79128",
+            "default_network_acl_no": "47418",
+            "default_private_route_table_no": "63543",
+            "default_public_route_table_no": "63542",
+            "id": "30583",
+            "ipv4_cidr_block": "10.0.0.0/16",
+            "name": "bus-vpc",
+            "vpc_no": "30583"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    }
+  ],
+  "check_results": []
+}
