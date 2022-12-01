@@ -1,0 +1,9 @@
+#!/bin/bash
+sudo apt update -y
+sudo apt install -y software-properties-common
+sudo add-apt-repository -y ppa:deadsnakes/ppa
+sudo apt install -y python3.9 python3.9-distutils
+sudo curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+sudo python3.9 /tmp/get-pip.py
+sudo pip install -r /tmp/requirements.txt
+sudo python run /bus-crol-main.py
