@@ -1,1 +1,10 @@
-wqeqw
+깃 
+로컬 
+
+
+깃/로그인 + 주소 / init / git add / git commiit -m  sada / git push 
+
+깃 허브
+온라인 저장소
+
+
